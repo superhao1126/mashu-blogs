@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#F8F9FB"/>
+  <path d="M0 0h1200v12H0z" fill="#345FA8"/>
+  <rect x="820" y="70" width="310" height="490" rx="24" fill="#EDF2FC"/>
+  <g fill="none" stroke="#D9E1EF"><path d="M854 122h242M854 500h242"/><circle cx="1082" cy="106" r="4"/></g>
+  <text x="80" y="132" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="600" fill="#345FA8">麻薯 · MaShu</text>
+  <text x="76" y="265" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="64" font-weight="700" letter-spacing="-2" fill="#202B3D">麻薯的技术笔记<tspan fill="#345FA8">。</tspan></text>
+  <text x="80" y="335" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="27" fill="#596577">把解决过的问题，整理成下次用得上的笔记。</text>
+  <text x="80" y="412" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="21" fill="#596577">软件与应用开发　/　数据库与基础设施　/　开发环境与工具</text>
+  <path d="M80 493h650" stroke="#E3E7ED"/>
+  <text x="80" y="545" font-family="Arial, sans-serif" font-size="23" letter-spacing="2" fill="#345FA8">www.rungos.cn</text>
+  <g transform="translate(872 183) scale(2.6)">
+    <path d="M16 49C16 35 24 20 39 20S64 35 64 49c0 10-10 15-24 15S16 59 16 49Z" fill="#FFFAEF" stroke="#365689" stroke-width="2.5"/>
+    <path d="M27 28c3-3 6-4 10-4" stroke="#DFD6C0" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="31" cy="45" rx="2" ry="2.8" fill="#365689"/><ellipse cx="49" cy="45" rx="2" ry="2.8" fill="#365689"/>
+    <path d="M36 51c2 3 6 3 8 0" fill="none" stroke="#365689" stroke-width="2" stroke-linecap="round"/>
+    <ellipse cx="25" cy="50" rx="3.5" ry="2" fill="#EDC9B9"/><ellipse cx="55" cy="50" rx="3.5" ry="2" fill="#EDC9B9"/>
+  </g>
+  <text x="975" y="430" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="23" fill="#345FA8">写下来，慢慢积累。</text>
+</svg>

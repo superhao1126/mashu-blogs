@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /login.html
+Disallow: /risk-link.html
+
+# ChatGPT 搜索爬虫；与通用规则保持相同的辅助页面限制。
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /login.html
+Disallow: /risk-link.html
+
+Sitemap: https://www.rungos.cn/sitemap.xml

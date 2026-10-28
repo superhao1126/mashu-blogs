@@ -1,12 +1,17 @@
 import { defineConfig } from "vitepress";
 import llmstxt from "vitepress-plugin-llms";
 import { teekConfig } from "./teekConfig";
+import { fileURLToPath } from "node:url";
+import { createRewrites } from "vitepress-theme-teek/config";
+import { canonicalPath, pageHead, siteDescription, siteOrigin } from "./seo";
 
-const description = "麻薯（MaShu）的个人技术与实践笔记，记录软件开发、数据库、服务器、日常工具与持续探索，把解决过的问题整理成可查阅的经验。";
+const description = siteDescription;
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   extends: teekConfig,
+  // 生成与永久链接对应的静态 HTML，直接访问时无需先载入 404 页面。
+  rewrites: createRewrites({ srcDir: fileURLToPath(new URL("../", import.meta.url)) }),
   title: "麻薯的技术笔记",
   description: description,
   cleanUrls: false,
@@ -17,11 +22,8 @@ export default defineConfig({
       "link",
       { rel: "icon", type: "image/svg+xml", href: "/mashu.svg" },
     ],
-    ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:locale", content: "zh-CN" }],
-    ["meta", { property: "og:title", content: "麻薯的技术笔记 · MaShu" }],
     ["meta", { property: "og:site_name", content: "麻薯的技术笔记" }],
-    ["meta", { property: "og:description", content: description }],
     ["meta", { name: "author", content: "麻薯 · MaShu" }],
     // 禁止浏览器缩放
     // [
@@ -55,6 +57,10 @@ export default defineConfig({
       },
     ],
   ],
+  transformHead: ({ pageData }) => pageHead(pageData),
+  transformPageData: pageData => {
+    pageData.frontmatter.canonicalUrl = new URL(canonicalPath(pageData), siteOrigin).href;
+  },
   markdown: {
     codeCopyButtonTitle: "复制代码",
     // 开启行号
@@ -73,17 +79,8 @@ export default defineConfig({
     },
   },
   sitemap: {
-    hostname: "https://www.rungos.cn",
-    transformItems: (items) => {
-      // 插件映射的键为不含扩展名的源路径，sitemap 则使用 .html 路径。
-      const permalinks = (globalThis as any).VITEPRESS_CONFIG.site.themeConfig
-        .permalinks;
-      return items.map((item) => {
-        const sourcePath = decodeURI(item.url).replace(/^\//, "").replace(/\.html$/, "");
-        const permalink = permalinks?.map[sourcePath];
-        return permalink ? { ...item, url: permalink.replace(/^\//, "") } : item;
-      });
-    },
+    hostname: siteOrigin,
+    transformItems: items => items.filter(item => !["login.html", "risk-link.html"].includes(item.url.replace(/^\//, ""))),
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -168,7 +165,11 @@ export default defineConfig({
   },
   vite: {
     // 该插件的开发中间件会重复调用 next，保留构建产物生成即可。
-    plugins: llmstxt().map((plugin) => ({ ...plugin, apply: "build" as const })),
+    plugins: llmstxt({
+      domain: siteOrigin,
+      ignoreFiles: ["@pages/loginPage.md", "@pages/riskLinkPage.md"],
+      injectLLMHint: false,
+    }).map((plugin) => ({ ...plugin, apply: "build" as const })),
   },
   // transformHtml: (code, id, context) => {
   //   if (context.page !== "404.md") return code;

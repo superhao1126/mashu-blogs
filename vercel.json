@@ -1,0 +1,89 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vitepress",
+  "installCommand": "npx --yes pnpm@12.10.1 install --frozen-lockfile",
+  "buildCommand": "npx --yes pnpm@12.10.1 run docs:build",
+  "outputDirectory": "docs/.vitepress/dist",
+  "redirects": [
+    {
+      "source": "/02.文档/Docker/Docker安装与Compose入门.html",
+      "destination": "/docker/install.html",
+      "permanent": true
+    },
+    {
+      "source": "/02.文档/Java/Jenv java多版本管理.html",
+      "destination": "/02.文档/Jenv java多版本管理.html",
+      "permanent": true
+    },
+    {
+      "source": "/02.文档/Nginx/Nginx安装与站点配置.html",
+      "destination": "/nginx/install.html",
+      "permanent": true
+    },
+    {
+      "source": "/02.文档/Python/conda管理工具.html",
+      "destination": "/02.文档/conda管理工具.html",
+      "permanent": true
+    },
+    {
+      "source": "/02.文档/Redis/Redis-安装与业务接入指南.html",
+      "destination": "/02.文档/Redis-安装与业务接入指南.html",
+      "permanent": true
+    },
+    {
+      "source": "/02.文档/前端开发/MathJax使用指南.html",
+      "destination": "/frontend/mathjax-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/02.文档/前端开发/前端开发规范.html",
+      "destination": "/pages/frontend-dev-spec.html",
+      "permanent": true
+    },
+    {
+      "source": "/02.文档/前端开发/虚拟列表.html",
+      "destination": "/frontend/virtual-list.html",
+      "permanent": true
+    },
+    {
+      "source": "/02.文档/前端开发/防抖与节流.html",
+      "destination": "/frontend/debounce-throttle.html",
+      "permanent": true
+    },
+    {
+      "source": "/@pages/aboutPage.html",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/@pages/archivesPage.html",
+      "destination": "/archives.html",
+      "permanent": true
+    },
+    {
+      "source": "/@pages/articleOverviewPage.html",
+      "destination": "/articleOverview.html",
+      "permanent": true
+    },
+    {
+      "source": "/@pages/categoriesPage.html",
+      "destination": "/categories.html",
+      "permanent": true
+    },
+    {
+      "source": "/@pages/loginPage.html",
+      "destination": "/login.html",
+      "permanent": true
+    },
+    {
+      "source": "/@pages/riskLinkPage.html",
+      "destination": "/risk-link.html",
+      "permanent": true
+    },
+    {
+      "source": "/@pages/tagsPage.html",
+      "destination": "/tags.html",
+      "permanent": true
+    }
+  ]
+}

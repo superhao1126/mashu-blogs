@@ -192,24 +192,18 @@ export const teekConfig = defineTeekConfig({
   },
   // 在每个文章页顶部显示 VitePress 容器添加提示，使用场景如添加文章版权声明。
   articleBottomTip: (frontmatter) => {
-    if (typeof window === "undefined") return;
-
-    const hash = false;
-    const query = false;
-    const { origin, pathname, search } = window.location;
-    const url = `${origin}${frontmatter.permalink ?? pathname}${
-      query ? search : ""
-    }${hash ? location.hash : ""}`;
+    // canonicalUrl 在构建时注入，服务端与浏览器生成相同的版权信息。
+    const url = frontmatter.canonicalUrl;
     const author = "麻薯 · MaShu";
 
     return {
       type: "tip",
       // title: "声明", // 可选
-      text: `<p>作者：${author}</p>
-             <p style="margin-bottom: 0">链接：<a href="${decodeURIComponent(
+      text: `作者：${author}<br>
+             链接：<a href="${decodeURIComponent(
                url
-             )}" target="_blank">${decodeURIComponent(url)}</a></p>
-             <p>版权：此文章版权归 ${author} 所有，如有转载，请注明出处!</p>
+             )}" target="_blank">${decodeURIComponent(url)}</a><br>
+             版权：此文章版权归 ${author} 所有，如有转载，请注明出处!
             `,
     };
   },
@@ -257,6 +251,7 @@ export const teekConfig = defineTeekConfig({
     },
     sidebarOption: {
       initItems: false,
+      resolveRule: "rewrites",
     },
   },
   // 文章配置
