@@ -73,7 +73,7 @@ export default defineConfig({
     },
   },
   sitemap: {
-    hostname: "https://www.idoit.icu", // ** 换成你的域名
+    hostname: "https://www.rungos.cn",
     transformItems: (items) => {
       // 插件映射的键为不含扩展名的源路径，sitemap 则使用 .html 路径。
       const permalinks = (globalThis as any).VITEPRESS_CONFIG.site.themeConfig
