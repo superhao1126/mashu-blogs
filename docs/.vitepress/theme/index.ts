@@ -8,7 +8,8 @@ import HomePostList from "./components/HomePostList.vue";
 import ArticleViews from "./components/ArticleViews.vue";
 
 // Teek 在线主题包引用（需安装 Teek 在线版本）
-import "vitepress-theme-teek/index.css";
+// 主样式与根入口一致，避免加载安装包中缺失的旧 iconfont 字体声明。
+import "vitepress-theme-teek/theme-chalk/index.css";
 import "vitepress-theme-teek/theme-chalk/tk-code-block-mobile.css"; // 移动端代码块样式优化
 import "vitepress-theme-teek/theme-chalk/tk-sidebar.css"; // 侧边栏优化
 import "vitepress-theme-teek/theme-chalk/tk-nav.css"; // 导航栏优化

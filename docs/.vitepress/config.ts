@@ -4,14 +4,16 @@ import { teekConfig } from "./teekConfig";
 import { fileURLToPath } from "node:url";
 import { createRewrites } from "vitepress-theme-teek/config";
 import { canonicalPath, pageHead, siteDescription, siteOrigin } from "./seo";
+import { sourceSidebar } from "./llms-sidebar";
 
 const description = siteDescription;
+const rewrites = createRewrites({ srcDir: fileURLToPath(new URL("../", import.meta.url)) });
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   extends: teekConfig,
   // 生成与永久链接对应的静态 HTML，直接访问时无需先载入 404 页面。
-  rewrites: createRewrites({ srcDir: fileURLToPath(new URL("../", import.meta.url)) }),
+  rewrites,
   title: "麻薯的技术笔记",
   description: description,
   cleanUrls: false,
@@ -174,6 +176,7 @@ export default defineConfig({
       domain: siteOrigin,
       ignoreFiles: ["@pages/loginPage.md", "@pages/riskLinkPage.md"],
       injectLLMHint: false,
+      sidebar: sidebar => sourceSidebar(sidebar, rewrites),
     }).map((plugin) => ({ ...plugin, apply: "build" as const })),
   },
   // transformHtml: (code, id, context) => {
