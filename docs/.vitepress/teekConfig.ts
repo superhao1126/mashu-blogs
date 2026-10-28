@@ -5,7 +5,12 @@ export const teekConfig = defineTeekConfig({
   teekHome: true, // 是否开启博客首页
   vpHome: false, // 是否隐藏 VP 首页
   sidebarTrigger: true, // 是否开启侧边栏折叠功能
-  author: { name: "MaShu", link: "https://github.com/superhao1126" },
+  author: { name: "麻薯 · MaShu", link: "https://github.com/superhao1126" },
+  topArticle: { enabled: false },
+  windowTransition: { card: false, post: false },
+  friendLink: { enabled: false },
+  category: { enabled: true, homeTitle: "文章分类", limit: 6, autoPage: false },
+  tag: { enabled: true, homeTitle: "常用标签", limit: 6, autoPage: false },
   backTop: {
     enabled: true, // 是否启用返回顶部按钮
     content: "icon", // 回到顶部按钮的显示内容，可选配置 progress | icon
@@ -23,7 +28,7 @@ export const teekConfig = defineTeekConfig({
     copyright: {
       show: true, // 是否显示博客版权
       createYear: 2025,
-      suffix: "MaShu. All rights reserved.",
+      suffix: "麻薯 · MaShu. 写下来，慢慢积累。",
     },
     // ICP 备案信息配置
     // icpRecord: {
@@ -76,13 +81,14 @@ export const teekConfig = defineTeekConfig({
   },
   articleAnalyze: {
     showIcon: true, // 作者、日期、分类、标签、字数、阅读时长、浏览量等文章信息的图标是否显示
-    dateFormat: "yyyy-MM-dd hh:mm:ss", // 文章日期格式，首页和文章页解析日期时使用
+    dateFormat: "yyyy-MM-dd",
     showInfo: true, // 是否展示作者、日期、分类、标签、字数、阅读时长、浏览量等文章信息，分别作用于首页和文章页
-    showAuthor: true, // 是否展示作者
-    showCreateDate: true, // 是否展示创建日期
+    showAuthor: false,
+    showCreateDate: ["post"],
     showUpdateDate: true, // 是否展示更新日期，仅在文章页显示
     showCategory: true, // 是否展示分类
-    showTag: true, // 是否展示标签
+    showTag: false,
+    teleport: { selector: ".vp-doc h1", position: "after", className: "mashu-article-meta" },
   },
   breadcrumb: {
     enabled: true, // 是否启用面包屑
@@ -101,15 +107,15 @@ export const teekConfig = defineTeekConfig({
   ],
   // 站点信息卡片配置
   docAnalysis: {
-    enabled: true, // 是否启用站点信息卡片
+    enabled: false, // 首页保留个人介绍和分类，阅读字数仍用于文章页
     createTime: "2025-11-13", // 站点创建时间
     wordCount: true, // 是否开启文章页的字数统计
     readingTime: true, // 是否开启文章页的阅读时长统计
     // 访问量、访客数统计配置
     statistics: {
       provider: "busuanzi", // 网站流量统计提供商
-      siteView: true, // 是否开启首页的访问量和排名统计
-      pageView: true, // 是否开启文章页的浏览量统计
+      siteView: false,
+      pageView: false, // 浏览量交由支持超时和失败隐藏的 ArticleViews 展示
       tryRequest: false, // 如果请求网站流量统计接口失败，是否重试
       tryCount: 5, // 重试次数，仅当 tryRequest 为 true 时有效
       tryIterationTime: 2000, // 重试间隔时间，单位：毫秒，仅当 tryRequest 为 true 时有效
@@ -140,7 +146,7 @@ export const teekConfig = defineTeekConfig({
     },
   ],
   banner: {
-    enabled: true,
+    enabled: false, // 使用首页插槽中的个人介绍和专题入口
     name: "MaShu Blog",
     bgStyle: "pure",
     pureBgColor: "var(--vp-c-bg-alt)",
@@ -152,10 +158,10 @@ export const teekConfig = defineTeekConfig({
     imgWaves: false,
   },
   blogger: {
-    name: "MaShu",
-    slogan: "开发实践与学习笔记",
+    name: "麻薯 · MaShu",
+    slogan: "记录实践，慢慢积累。",
     shape: "circle",
-    avatar: "/logo/avatar.jpeg",
+    avatar: "/mashu.svg",
     circleSize: 72,
     color: "var(--vp-c-text-1)",
   },
@@ -172,18 +178,17 @@ export const teekConfig = defineTeekConfig({
     hash: false, // 是否包含哈希值
   },
   articleTopTip: (frontmatter, localeIndex, page) => {
-    const tip: Record<string, string> = {
-      type: "warning",
-      text: "文章发布较早，内容可能过时，阅读注意甄别。",
+    // Teek 会序列化配置函数，因此日期判断保持在回调内，不引用外部闭包。
+    if (frontmatter.outdated === false) return;
+    const timestamps = [frontmatter.reviewedAt, frontmatter.lastUpdated, page.lastUpdated, frontmatter.date]
+      .filter(value => typeof value === "string" || typeof value === "number" || value instanceof Date)
+      .map(value => new Date(value).getTime())
+      .filter(Number.isFinite);
+    const needsReview = timestamps.length > 0 && Date.now() - Math.max(...timestamps) > 180 * 24 * 60 * 60 * 1000;
+    if (frontmatter.outdated === true || needsReview) return {
+      type: "info",
+      text: "这篇笔记已超过半年未维护，使用前请核对版本和适用环境。",
     };
-
-    // 大于半年，添加提示
-    const longTime = 6 * 30 * 24 * 60 * 60 * 1000;
-    if (
-      frontmatter.date &&
-      Date.now() - new Date(frontmatter.date).getTime() > longTime
-    )
-      return tip;
   },
   // 在每个文章页顶部显示 VitePress 容器添加提示，使用场景如添加文章版权声明。
   articleBottomTip: (frontmatter) => {
@@ -195,7 +200,7 @@ export const teekConfig = defineTeekConfig({
     const url = `${origin}${frontmatter.permalink ?? pathname}${
       query ? search : ""
     }${hash ? location.hash : ""}`;
-    const author = "MaShu";
+    const author = "麻薯 · MaShu";
 
     return {
       type: "tip",
@@ -261,8 +266,8 @@ export const teekConfig = defineTeekConfig({
     showMore: true, // 是否显示更多按钮
     moreLabel: "阅读全文 >", // 更多按钮文字
     emptyLabel: "暂无文章", // 文章列表为空时的标签
-    coverImgMode: "default", // 文章封面图模式
-    showCapture: true, // 是否在摘要位置显示文章部分文字，当为 true 且不使用 frontmatter.describe 和 <!-- more --> 时，会自动截取前 300 个字符作为摘要
+    coverImgMode: "small",
+    showCapture: false, // 使用每篇文章单独维护的摘要
     splitSeparator: true, // 文章信息（作者、创建时间、分类、标签等信息）是否添加 | 分隔符
     transition: false, // 是否开启过渡动画
     transitionName: "tk-slide-fade", // 自定义过渡动画名称

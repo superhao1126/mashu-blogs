@@ -1,4 +1,5 @@
 ---
+description: 记录 macOS 上使用 jenv 管理多个 Java 版本的方法，涵盖 JDK 安装、Shell 配置，以及全局、项目与终端三级切换。整理常见的路径冲突和排查步骤，方便不同项目之间切换环境。
 date: 2026-10-22 10:01:07
 title: Jenv java多版本管理
 sidebarSort: 1

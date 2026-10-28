@@ -1,6 +1,10 @@
 import Teek from "vitepress-theme-teek";
 // import TeekLayoutProvider from "./components/TeekLayoutProvider.vue";
 import MyNoticeContent from "./components/MyNoticeContent.vue";
+import HomeIntro from "./components/HomeIntro.vue";
+import LatestHeading from "./components/LatestHeading.vue";
+import PostList from "./components/PostList.vue";
+import ArticleViews from "./components/ArticleViews.vue";
 
 // Teek 在线主题包引用（需安装 Teek 在线版本）
 import "vitepress-theme-teek/index.css";
@@ -25,6 +29,10 @@ export default {
   Layout() {
     return h(Teek.Layout, null, {
       "teek-notice-content": () => h(MyNoticeContent),
+      "teek-home-before": () => h(HomeIntro),
+      "teek-home-post-before": () => h(LatestHeading),
+      "teek-home-post": ({ currentPosts }) => h(PostList, { posts: currentPosts }),
+      "teek-article-analyze-after": () => h(ArticleViews),
     });
   },
   enhanceApp() {},

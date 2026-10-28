@@ -1,4 +1,5 @@
 ---
+description: 记录在技术文档中使用 MathJax 渲染数学公式的方法，介绍行内与独立公式、常用 LaTeX 写法和配置要点。结合页面内容更新时的重新渲染，让公式在博客与文档中稳定展示。
 title: MathJax使用指南
 sidebarSort: 3
 date: 2025-11-11 10:30:00
@@ -11,6 +12,9 @@ tags:
   - 数学公式
   - Markdown
 ---
+
+# MathJax使用指南
+
 
 ## 背景
 

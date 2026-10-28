@@ -1,4 +1,5 @@
 ---
+description: 记录 Ubuntu 24.04 上 Redis 的安装、配置与业务接入过程，整理本机访问、认证、持久化和服务管理等要点。结合应用侧的连接设置与排查命令，帮助定位部署和使用中的常见问题。
 title: Ubuntu 24.04 安装、配置 Redis 并接入业务
 sidebarSort: 1
 date: 2026-08-24

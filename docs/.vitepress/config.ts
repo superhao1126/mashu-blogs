@@ -2,12 +2,12 @@ import { defineConfig } from "vitepress";
 import llmstxt from "vitepress-plugin-llms";
 import { teekConfig } from "./teekConfig";
 
-const description = "MaShu 的技术博客，记录前端开发、Java、Python、数据库与服务器部署的学习笔记和实践。";
+const description = "麻薯（MaShu）的个人技术与实践笔记，记录软件开发、数据库、服务器、日常工具与持续探索，把解决过的问题整理成可查阅的经验。";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   extends: teekConfig,
-  title: "MaShu Blog",
+  title: "麻薯的技术笔记",
   description: description,
   cleanUrls: false,
   lastUpdated: true,
@@ -15,15 +15,14 @@ export default defineConfig({
   head: [
     [
       "link",
-      { rel: "icon", type: "image/svg+xml", href: "/teek-logo-mini.svg" },
+      { rel: "icon", type: "image/svg+xml", href: "/mashu.svg" },
     ],
-    ["link", { rel: "icon", type: "image/png", href: "/teek-logo-mini.png" }],
     ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:locale", content: "zh-CN" }],
-    ["meta", { property: "og:title", content: "MaShu 的博客 | MaShu Blog" }],
-    ["meta", { property: "og:site_name", content: "MaShu 的博客" }],
+    ["meta", { property: "og:title", content: "麻薯的技术笔记 · MaShu" }],
+    ["meta", { property: "og:site_name", content: "麻薯的技术笔记" }],
     ["meta", { property: "og:description", content: description }],
-    ["meta", { name: "author", content: "MaShu" }],
+    ["meta", { name: "author", content: "麻薯 · MaShu" }],
     // 禁止浏览器缩放
     // [
     //   "meta",
@@ -32,7 +31,7 @@ export default defineConfig({
     //     content: "width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no",
     //   },
     // ],
-    ["meta", { name: "keywords", content: "MaShu,技术博客,前端,Java,Python,Redis,Nginx,Docker" }],
+    ["meta", { name: "keywords", content: "麻薯,MaShu,技术笔记,软件开发,工程实践,数据库,服务器,开发工具" }],
     // MathJax 配置脚本
     [
       "script",
@@ -57,6 +56,7 @@ export default defineConfig({
     ],
   ],
   markdown: {
+    codeCopyButtonTitle: "复制代码",
     // 开启行号
     lineNumbers: true,
     image: {
@@ -87,13 +87,16 @@ export default defineConfig({
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: "/teek-logo-mini.svg",
+    logo: "/mashu.svg",
+    siteTitle: "麻薯 · MaShu",
+    darkModeSwitchTitle: "切换深色模式",
+    lightModeSwitchTitle: "切换浅色模式",
     darkModeSwitchLabel: "主题",
     sidebarMenuLabel: "菜单",
     returnToTopLabel: "返回顶部",
     lastUpdatedText: "上次更新时间",
     outline: {
-      level: [2, 4],
+      level: 2,
       label: "本页导航",
     },
     docFooter: {
@@ -103,9 +106,9 @@ export default defineConfig({
     nav: [
       { text: "首页", link: "/" },
       {
-        text: "文档",
-        link: "/frontend/virtual-list",
-        activeMatch: "/02.文档/",
+        text: "文章",
+        link: "/articleOverview",
+        activeMatch: "/articleOverview|/frontend/|/02\\.|/nginx/|/docker/|/pages/",
       },
       { text: "分类", link: "/categories" },
       { text: "关于", link: "/about" },
@@ -117,11 +120,44 @@ export default defineConfig({
       },
     ],
     search: {
-      provider: "algolia",
+      provider: "local",
       options: {
-        appId: "AOSJZ9XMJU",
-        apiKey: "5af8f7b7b6c0455166aff7c639b0d82b",
-        indexName: "mashu",
+        detailedView: false,
+        translations: {
+          button: { buttonText: "搜索", buttonAriaLabel: "搜索笔记" },
+          modal: {
+            displayDetails: "显示详细内容",
+            resetButtonTitle: "清除搜索",
+            backButtonTitle: "返回",
+            noResultsText: "没有找到相关笔记，试试其他关键词。",
+            footer: { selectText: "选择", selectKeyAriaLabel: "回车键", navigateText: "切换", navigateUpKeyAriaLabel: "向上", navigateDownKeyAriaLabel: "向下", closeText: "关闭", closeKeyAriaLabel: "Esc 键" },
+          },
+        },
+        miniSearch: {
+          // 整篇正文进入同一条索引，避免每个章节重复列出同一篇文章。
+          _splitIntoSections: (_path, html) => {
+            const heading = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1];
+            if (!heading) return [];
+            const title = heading
+              .replace(/<a\b[^>]*class=["']header-anchor["'][^>]*>[\s\S]*?<\/a>/gi, "")
+              .replace(/<[^>]+>/g, "")
+              .trim();
+            if (!title) return [];
+            const text = html
+              .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, " ")
+              .replace(/<[^>]+>/g, " ")
+              .replace(/\s+/g, " ")
+              .trim();
+            return [{ titles: [title], text }];
+          },
+          options: {
+            tokenize: (text) => Array.from(
+              new Intl.Segmenter("zh-CN", { granularity: "word" }).segment(text),
+              item => item.segment
+            ).filter(term => /[\p{L}\p{N}]/u.test(term)),
+          },
+          searchOptions: { prefix: true, fuzzy: 0.15 },
+        },
       },
     },
     editLink: {

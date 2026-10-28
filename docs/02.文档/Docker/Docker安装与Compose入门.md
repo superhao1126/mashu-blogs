@@ -1,4 +1,5 @@
 ---
+description: 从安装前检查开始，在 Ubuntu 24.04 上安装 Docker Engine 与 Compose。记录镜像和容器的基本操作、服务编排及常见问题，方便从开发环境逐步搭建可重复部署的服务。
 title: Ubuntu 24.04 安装 Docker Engine 与 Compose
 sidebarSort: 1
 date: 2026-10-22

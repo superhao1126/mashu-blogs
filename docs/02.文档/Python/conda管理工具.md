@@ -1,4 +1,5 @@
 ---
+description: 整理 macOS 上的 Python 与 Conda 环境，记录虚拟环境的创建、切换、导出和清理方法。区分系统 Python、Homebrew 与 Conda 的职责，减少版本和路径冲突，让日常开发环境更容易维护。
 date: 2026-10-22 10:01:07
 title: Conda管理工具
 sidebarSort: 1
