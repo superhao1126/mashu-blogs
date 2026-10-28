@@ -13,12 +13,13 @@ corepack pnpm docs:dev
 生产验证：
 
 ```bash
+corepack pnpm docs:typecheck
 corepack pnpm docs:build
 corepack pnpm docs:check
 corepack pnpm docs:preview
 ```
 
-`docs:check` 核对生成页面、canonical、sitemap、robots、分享图以及旧地址跳转。
+`docs:typecheck` 严格检查全部配置、主题 TS、Vue 组件和构建脚本；`docs:check` 核对生成页面、canonical、sitemap、robots、分享图以及旧地址跳转。
 
 ## Vercel
 

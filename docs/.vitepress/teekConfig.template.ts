@@ -149,7 +149,7 @@ export const teekConfig = defineTeekConfig({
     showMore: true, // 是否显示更多按钮
     moreLabel: "阅读全文 >", // 更多按钮文字
     emptyLabel: "暂无文章", // 文章列表为空时的标签
-    coverImgMode: "default", // 文章封面图模式
+    coverImgMode: "small", // 文章封面图模式
     showCapture: false, // 是否在摘要位置显示文章部分文字，当为 true 且不使用 frontmatter.describe 和 <!-- more --> 时，会自动截取前 300 个字符作为摘要
     splitSeparator: false, // 文章信息（作者、创建时间、分类、标签等信息）是否添加 | 分隔符
     transition: true, // 是否开启过渡动画

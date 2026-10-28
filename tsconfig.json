@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "types": ["node", "vitepress/client"],
+    "allowJs": true,
+    "checkJs": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["docs/.vitepress/**/*.ts", "docs/.vitepress/**/*.vue", "scripts/**/*.mjs"],
+  "exclude": ["node_modules", "docs/.vitepress/cache", "docs/.vitepress/dist"]
+}

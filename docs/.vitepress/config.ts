@@ -62,6 +62,11 @@ export default defineConfig({
     pageData.frontmatter.canonicalUrl = new URL(canonicalPath(pageData), siteOrigin).href;
   },
   markdown: {
+    languageAlias: {
+      conf: "ini",
+    },
+    // 当前高亮器不支持将别名映射到纯文本，注册空语法以保留 redis 标签。
+    languages: [{ name: "redis", scopeName: "source.redis", patterns: [], repository: {} }],
     codeCopyButtonTitle: "复制代码",
     // 开启行号
     lineNumbers: true,

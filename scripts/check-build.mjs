@@ -7,8 +7,10 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const out = resolve(root, "docs/.vitepress/dist");
 const origin = "https://www.rungos.cn";
 const excluded = new Set(["/404.html", "/login.html", "/risk-link.html"]);
+/** @param {string} path */
 const read = path => readFileSync(resolve(root, path), "utf8");
 const pkg = JSON.parse(read("package.json"));
+/** @type {{ installCommand: string, buildCommand: string, outputDirectory: string, redirects: { source: string, destination: string, permanent: boolean }[] }} */
 const vercel = JSON.parse(read("vercel.json"));
 const pnpmVersion = pkg.packageManager.match(/^pnpm@([^+]+)/)?.[1];
 assert(pnpmVersion, "缺少固定的 pnpm 版本");
@@ -26,19 +28,25 @@ for (const rule of vercel.redirects) {
   assert(existsSync(resolve(out, `.${rule.destination}`)), `跳转目标不存在：${rule.destination}`);
 }
 
+/** @param {string} tag */
 function attributes(tag) {
   return Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map(match => [match[1], match[2]]));
 }
+/**
+ * @param {string} html
+ * @param {string} name
+ */
 function meta(html, name) {
   return [...html.matchAll(/<meta\b[^>]*>/g)].map(match => attributes(match[0]))
     .filter(item => item.name === name || item.property === name).map(item => item.content);
 }
+/** @param {string} html */
 function canonical(html) {
   return [...html.matchAll(/<link\b[^>]*>/g)].map(match => attributes(match[0]))
     .filter(item => item.rel === "canonical").map(item => item.href);
 }
 
-const pages = readdirSync(out, { recursive: true }).filter(path => path.endsWith(".html"));
+const pages = readdirSync(out, { recursive: true, encoding: "utf8" }).filter(path => path.endsWith(".html"));
 assert(pages.length > 0, "请先运行 docs:build");
 assert(read("docs/.vitepress/dist/index.html").includes('<article class="mashu-post">'), "首页文章列表未静态渲染");
 assert(read("docs/.vitepress/dist/frontend/virtual-list.html").includes("版权：此文章版权归"), "文章版权信息未静态渲染");

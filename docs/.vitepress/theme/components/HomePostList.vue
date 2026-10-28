@@ -2,9 +2,10 @@
 import { computed, onMounted, ref } from "vue";
 import { useData } from "vitepress";
 import { usePosts, useTeekConfig } from "vitepress-theme-teek";
+import type { TkContentData } from "vitepress-theme-teek";
 import PostList from "./PostList.vue";
 
-const props = defineProps<{ posts: any[] }>();
+const props = defineProps<{ posts: TkContentData[] }>();
 const { frontmatter } = useData();
 const posts = usePosts();
 const { getTeekConfigRef } = useTeekConfig();

@@ -1,4 +1,5 @@
 import Teek from "vitepress-theme-teek";
+import type { TkContentData } from "vitepress-theme-teek";
 // import TeekLayoutProvider from "./components/TeekLayoutProvider.vue";
 import MyNoticeContent from "./components/MyNoticeContent.vue";
 import HomeIntro from "./components/HomeIntro.vue";
@@ -31,7 +32,7 @@ export default {
       "teek-notice-content": () => h(MyNoticeContent),
       "teek-home-before": () => h(HomeIntro),
       "teek-home-post-before": () => h(LatestHeading),
-      "teek-home-post": ({ currentPosts }) => h(HomePostList, { posts: currentPosts }),
+      "teek-home-post": ({ currentPosts }: { currentPosts: TkContentData[] }) => h(HomePostList, { posts: currentPosts }),
       "teek-article-analyze-after": () => h(ArticleViews),
     });
   },
