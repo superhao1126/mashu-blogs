@@ -31,10 +31,10 @@ export const teekConfig = defineTeekConfig({
       suffix: "麻薯 · MaShu. 写下来，慢慢积累",
     },
     // ICP 备案信息配置
-    // icpRecord: {
-    //   name: "赣ICP备2025076242号",
-    //   link: "http://beian.miit.gov.cn/",
-    // },
+    icpRecord: {
+      name: "赣ICP备2025076242号-2",
+      link: "http://beian.miit.gov.cn/",
+    },
   },
   themeEnhance: {
     enabled: false, // 隐藏主题增强面板和右下角主题色切换入口
