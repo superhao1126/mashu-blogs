@@ -23,6 +23,7 @@ export default defineConfig({
   head: [
     ["meta", { name: "algolia-site-verification", content: "102CC76FCFAA90B1" }],
     ["meta", { name: "google-site-verification", content: "mizv8BOX-nFBHE5nCurNlfuN1EyosvqOS1UCz6htxS4" }],
+    ["meta", { name: "baidu-site-verification", content: "codeva-spQ239alFM" }],
     ["link", { rel: "alternate", type: "application/rss+xml", title: "麻薯的技术笔记 · RSS", href: `${siteOrigin}/rss.xml` }],
     [
       "link",
