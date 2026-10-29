@@ -28,7 +28,7 @@ export const teekConfig = defineTeekConfig({
     copyright: {
       show: true, // 是否显示博客版权
       createYear: 2025,
-      suffix: "麻薯 · MaShu. 写下来，慢慢积累。",
+      suffix: "麻薯 · MaShu. 写下来，慢慢积累",
     },
     // ICP 备案信息配置
     // icpRecord: {
@@ -107,14 +107,14 @@ export const teekConfig = defineTeekConfig({
   ],
   // 站点信息卡片配置
   docAnalysis: {
-    enabled: false, // 首页保留个人介绍和分类，阅读字数仍用于文章页
+    enabled: true, // 首页显示站点信息，包括运行时间和访问统计
     createTime: "2025-11-13", // 站点创建时间
     wordCount: true, // 是否开启文章页的字数统计
     readingTime: true, // 是否开启文章页的阅读时长统计
     // 访问量、访客数统计配置
     statistics: {
       provider: "busuanzi", // 网站流量统计提供商
-      siteView: false,
+      siteView: true, // 显示首页访问量和访客数
       pageView: false, // 浏览量交由支持超时和失败隐藏的 ArticleViews 展示
       tryRequest: false, // 如果请求网站流量统计接口失败，是否重试
       tryCount: 5, // 重试次数，仅当 tryRequest 为 true 时有效
@@ -169,7 +169,7 @@ export const teekConfig = defineTeekConfig({
   },
   blogger: {
     name: "麻薯 · MaShu",
-    slogan: "记录实践，慢慢积累。",
+    slogan: "记录实践，慢慢积累",
     shape: "circle",
     avatar: "/mashu.svg",
     circleSize: 72,
