@@ -100,7 +100,7 @@ export const teekConfig = defineTeekConfig({
     {
       provider: "baidu",
       options: {
-        id: "d20a1dd0aacd3f37ebc24d6626a65fef",
+        id: "c4b5b5e56d2faf7416454d129fcb70c0",
       },
     },
     { provider: "google", options: { id: "G-C480B0LRMT" } },
