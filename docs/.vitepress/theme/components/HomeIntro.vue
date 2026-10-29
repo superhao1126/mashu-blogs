@@ -17,8 +17,8 @@ const countTopic = (categories: string[]) => posts.value.originPosts.filter(
     <section class="mashu-hero" aria-labelledby="home-title">
       <div class="mashu-hero__copy">
         <p class="mashu-eyebrow"><span aria-hidden="true"></span> 麻薯 · MaShu</p>
-        <h1 id="home-title">麻薯的技术笔记<span class="mashu-hero__dot">。</span></h1>
-        <p class="mashu-hero__description">把解决过的问题，整理成下次用得上的笔记。<br />记录软件开发、工程实践与日常探索。</p>
+        <h1 id="home-title">麻薯的技术笔记<span class="mashu-hero__dot"></span></h1>
+        <p class="mashu-hero__description">把解决过的问题，整理成下次用得上的笔记<br />记录软件开发、工程实践与日常探索</p>
         <div class="mashu-hero__actions">
           <a class="mashu-button mashu-button--primary" :href="withBase('/articleOverview.html')">浏览全部文章 <span aria-hidden="true">↗</span></a>
           <a class="mashu-button" href="#topics">查看专题 <span aria-hidden="true">↓</span></a>
@@ -27,7 +27,7 @@ const countTopic = (categories: string[]) => posts.value.originPosts.filter(
       <div class="mashu-hero__note" aria-hidden="true">
         <div class="mashu-note__top"><span>一份持续更新的技术手记</span><span>✳</span></div>
         <img :src="withBase('/mashu.svg')" alt="" width="64" height="64" />
-        <p>写下来，<br />下次就有答案。</p>
+        <p>写下来<br />下次就有答案</p>
         <div class="mashu-note__bottom"><span>{{ articleCount }} 篇笔记</span><span>持续积累中 ↗</span></div>
       </div>
     </section>
