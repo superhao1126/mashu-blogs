@@ -140,9 +140,19 @@ export const teekConfig = defineTeekConfig({
       link: "https://github.com/superhao1126",
     },
     {
-      icon: "simple-icons:gitee",
-      name: "Gitee",
-      link: "https://gitee.com/ahao02",
+      icon: "mdi:email",
+      name: "邮箱",
+      link: "mailto:superhao0126@gmail.com",
+    },
+    {
+      icon: "mdi:rss",
+      name: "RSS 订阅",
+      link: "/rss.xml",
+    },
+    {
+      icon: "mdi:home",
+      name: "个人主页",
+      link: "/about",
     },
   ],
   banner: {

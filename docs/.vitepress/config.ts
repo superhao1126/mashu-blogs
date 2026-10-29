@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { createRewrites } from "vitepress-theme-teek/config";
 import { canonicalPath, pageHead, siteDescription, siteOrigin } from "./seo";
 import { sourceSidebar } from "./llms-sidebar";
+import { generateRss, rssDevPlugin } from "./rss";
 
 const description = siteDescription;
 const rewrites = createRewrites({ srcDir: fileURLToPath(new URL("../", import.meta.url)) });
@@ -20,6 +21,7 @@ export default defineConfig({
   lastUpdated: true,
   lang: "zh-CN",
   head: [
+    ["link", { rel: "alternate", type: "application/rss+xml", title: "麻薯的技术笔记 · RSS", href: `${siteOrigin}/rss.xml` }],
     [
       "link",
       { rel: "icon", type: "image/svg+xml", href: "/mashu.svg" },
@@ -60,6 +62,7 @@ export default defineConfig({
     ],
   ],
   transformHead: ({ pageData }) => pageHead(pageData),
+  buildEnd: generateRss,
   transformPageData: pageData => {
     pageData.frontmatter.canonicalUrl = new URL(canonicalPath(pageData), siteOrigin).href;
   },
@@ -172,12 +175,12 @@ export default defineConfig({
   },
   vite: {
     // 该插件的开发中间件会重复调用 next，保留构建产物生成即可。
-    plugins: llmstxt({
+    plugins: [rssDevPlugin(), ...llmstxt({
       domain: siteOrigin,
       ignoreFiles: ["@pages/loginPage.md", "@pages/riskLinkPage.md"],
       injectLLMHint: false,
       sidebar: sidebar => sourceSidebar(sidebar, rewrites),
-    }).map((plugin) => ({ ...plugin, apply: "build" as const })),
+    }).map((plugin) => ({ ...plugin, apply: "build" as const }))],
   },
   // transformHtml: (code, id, context) => {
   //   if (context.page !== "404.md") return code;
