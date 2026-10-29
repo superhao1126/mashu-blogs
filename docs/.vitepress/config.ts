@@ -21,6 +21,7 @@ export default defineConfig({
   lastUpdated: true,
   lang: "zh-CN",
   head: [
+    ["meta", { name: "algolia-site-verification", content: "102CC76FCFAA90B1" }],
     ["link", { rel: "alternate", type: "application/rss+xml", title: "麻薯的技术笔记 · RSS", href: `${siteOrigin}/rss.xml` }],
     [
       "link",
