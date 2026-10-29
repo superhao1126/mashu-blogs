@@ -9,4 +9,4 @@ Allow: /
 Disallow: /login.html
 Disallow: /risk-link.html
 
-Sitemap: https://www.rungos.cn/sitemap.xml
+Sitemap: https://blog.rungos.cn/sitemap.xml

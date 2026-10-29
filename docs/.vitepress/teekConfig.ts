@@ -152,7 +152,7 @@ export const teekConfig = defineTeekConfig({
     {
       icon: "mdi:home",
       name: "个人主页",
-      link: "/about",
+      link: "/about.html",
     },
   ],
   banner: {

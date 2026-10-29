@@ -1,6 +1,6 @@
 import type { HeadConfig, PageData } from "vitepress";
 
-export const siteOrigin = "https://www.rungos.cn";
+export const siteOrigin = "https://blog.rungos.cn";
 export const siteName = "麻薯的技术笔记";
 export const siteDescription = "麻薯（MaShu）的个人技术与实践笔记，记录软件开发、数据库、服务器、日常工具与持续探索，把解决过的问题整理成可查阅的经验。";
 export const shareImage = `${siteOrigin}/og/mashu-card.png`;

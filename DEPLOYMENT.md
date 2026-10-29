@@ -27,12 +27,12 @@ corepack pnpm docs:preview
 
 永久链接通过 VitePress rewrites 在构建时生成静态 HTML。`vercel.json` 中的永久跳转保留旧的文件路径，避免历史链接失效。新增或变更文章永久链接后，应同步检查相应跳转和 `docs:check` 的结果。
 
-生产域名统一为 `https://www.rungos.cn`，共享配置位于 `docs/.vitepress/seo.ts`。修改域名时同步更新 `docs/public/robots.txt` 的 Sitemap 地址。分享图源文件和发布图片分别为 `docs/public/og/mashu-card.svg` 和 `mashu-card.png`。
+生产域名统一为 `https://blog.rungos.cn`，共享配置位于 `docs/.vitepress/seo.ts`。修改域名时同步更新 `docs/public/robots.txt` 的 Sitemap 地址。分享图源文件和发布图片分别为 `docs/public/og/mashu-card.svg` 和 `mashu-card.png`。
 
 仓库变更需提交并推送后，Vercel 才会应用新配置。域名 DNS 仍由域名服务商管理。
 
 ## 搜索与 AI 检索
 
-`robots.txt` 允许通用搜索爬虫及 OAI-SearchBot 抓取公开页面。上线后，应在 Google Search Console 和 Bing Webmaster Tools 验证域名并提交 `https://www.rungos.cn/sitemap.xml`，再用 URL 检查确认重点文章可被索引。Vercel 的访问保护、防火墙或验证码也不能拦住公开文章的爬虫请求。
+`robots.txt` 允许通用搜索爬虫及 OAI-SearchBot 抓取公开页面。上线后，应在 Google Search Console 和 Bing Webmaster Tools 验证域名并提交 `https://blog.rungos.cn/sitemap.xml`，再用 URL 检查确认重点文章可被索引。Vercel 的访问保护、防火墙或验证码也不能拦住公开文章的爬虫请求。
 
 构建会输出带正式域名的 `llms.txt`、`llms-full.txt` 和各文章 Markdown 文本，供支持这些入口的工具读取。它们是辅助材料，不保证搜索收录或 AI 引用。优先持续维护原创问题解法、适用版本、可复现步骤及参考来源。
