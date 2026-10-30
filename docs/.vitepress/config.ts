@@ -25,10 +25,8 @@ export default defineConfig({
     ["meta", { name: "google-site-verification", content: "mizv8BOX-nFBHE5nCurNlfuN1EyosvqOS1UCz6htxS4" }],
     ["meta", { name: "baidu-site-verification", content: "codeva-spQ239alFM" }],
     ["link", { rel: "alternate", type: "application/rss+xml", title: "麻薯的技术笔记 · RSS", href: `${siteOrigin}/rss.xml` }],
-    [
-      "link",
-      { rel: "icon", type: "image/svg+xml", href: "/mashu.svg" },
-    ],
+    ["link", { rel: "icon", type: "image/png", sizes: "192x192", href: "/favicon.png" }],
+    ["link", { rel: "shortcut icon", href: "/favicon.ico" }],
     ["meta", { property: "og:locale", content: "zh-CN" }],
     ["meta", { property: "og:site_name", content: "麻薯的技术笔记" }],
     ["meta", { name: "author", content: "麻薯 · MaShu" }],
